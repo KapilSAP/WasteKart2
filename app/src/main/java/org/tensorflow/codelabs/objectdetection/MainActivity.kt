@@ -33,8 +33,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.lifecycleScope
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.json.JSONArray
+import org.json.JSONObject
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.task.vision.detector.Detection
 import org.tensorflow.lite.task.vision.detector.ObjectDetector
@@ -42,8 +49,11 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 import kotlin.math.max
 import kotlin.math.min
+
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
@@ -126,26 +136,47 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             .build()
         val detector = ObjectDetector.createFromFileAndOptions(
             this, // the application context
-            "salad.tflite", // must be same as the filename in assets folder
+            "laptop_phone.tflite", // must be same as the filename in assets folder
             options
         )
 
         // Step 3: feed given image to the model and print the detection result
         val results = detector.detect(image)
         // Step 4: Parse the detection result and show it
-        val resultToDisplay = results.map {
-            // Get the top-1 category and craft the display text
-            val category = it.categories.first()
-            val text = "${category.label}, ${category.score.times(100).toInt()}%"
 
-            // Create a data object to display the detection result
-            DetectionResult(it.boundingBox, text)
-        }
+
+        GlobalScope.launch {
+
+            val resultToDisplay = results.map {
+                // Get the top-1 category and craft the display text
+                val category = it.categories.first()
+                val text = "${category.label}, ${category.score.times(100).toInt()}%"
+
+                //val priceResponse = getPrice("${category.label}")
+                val jsonObj: JSONObject = JSONObject("{items : [{'label':'Laptop','price': {'min':'10000','max':'50000' }},{'label':'Mobile phone','price': {'min':'1000','max':'5000' }}]}")
+                val jsonArray: JSONArray = jsonObj.getJSONArray("items")
+
+                var priceRage: String = "";
+                for (i in 0 until jsonArray.length()) {
+                    var jsonItem: JSONObject = jsonArray.getJSONObject(i)
+                    if(jsonItem.get("label").equals("${category.label}"))
+                    {
+                        priceRage = jsonItem.getJSONObject("price").get("min") as String + " - " + jsonItem.getJSONObject("price").get("max") as String
+                    }
+                }
+
+                // Create a data object to display the detection result
+                DetectionResult(it.boundingBox, text + priceRage)
+            }
 // Draw the detection result on the bitmap and show it.
-        val imgWithResult = drawDetectionResult(bitmap, resultToDisplay)
-        runOnUiThread {
-            inputImageView.setImageBitmap(imgWithResult)
+            val imgWithResult = drawDetectionResult(bitmap, resultToDisplay)
+            runOnUiThread {
+                inputImageView.setImageBitmap(imgWithResult)
+            }
         }
+
+
+
     }
 
     private fun debugPrint(results : List<Detection>) {
@@ -336,6 +367,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
             var margin = (box.width() - tagSize.width()) / 2.0F
             if (margin < 0F) margin = 0F
+
             canvas.drawText(
                 it.text, box.left + margin,
                 box.top + tagSize.height().times(1F), pen
@@ -343,6 +375,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
         return outputBitmap
     }
+
+    suspend fun getPrice(label: String): String =
+        suspendCoroutine { cont ->
+            val callback1 = Response.Listener<String> { response -> cont.resume(response) }
+            val callback2 = Response.ErrorListener { error -> cont.resume(error.toString()) }
+            val url = "https://price-recomm-srv-mediating-porcupine-gj.cfapps.us10.hana.ondemand.com/price-recomm/Products?%24top=1"
+            val queue = Volley.newRequestQueue(this)
+            val stringRequest = StringRequest(Request.Method.GET, url, callback1, callback2)
+            queue!!.add(stringRequest)
+        }
 }
 
 /**
@@ -350,3 +392,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
  *      A class to store the visualization info of a detected object.
  */
 data class DetectionResult(val boundingBox: RectF, val text: String)
+
+interface VolleyCallback {
+    fun onSuccess(result: String?)
+    fun onError(result: String?)
+}
