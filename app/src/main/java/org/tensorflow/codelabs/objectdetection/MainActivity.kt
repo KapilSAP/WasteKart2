@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var imgSampleThree: ImageView
     private lateinit var tvPlaceholder: TextView
     private lateinit var currentPhotoPath: String
+    private lateinit var priceRangeView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +81,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         imgSampleTwo = findViewById(R.id.imgSampleTwo)
         imgSampleThree = findViewById(R.id.imgSampleThree)
         tvPlaceholder = findViewById(R.id.tvPlaceholder)
+        priceRangeView = findViewById(R.id.tv_priceRange)
 
         captureImageFab.setOnClickListener(this)
         imgSampleOne.setOnClickListener(this)
@@ -146,14 +148,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
         GlobalScope.launch {
-
+            var minPrice : Int = 0
+            var maxPrice : Int = 0
             val resultToDisplay = results.map {
                 // Get the top-1 category and craft the display text
                 val category = it.categories.first()
                 val text = "${category.label}, ${category.score.times(100).toInt()}%"
 
                 //val priceResponse = getPrice("${category.label}")
-                val jsonObj: JSONObject = JSONObject("{items : [{'label':'Laptop','price': {'min':'10000','max':'50000' }},{'label':'Mobile phone','price': {'min':'1000','max':'5000' }}]}")
+                val jsonObj: JSONObject = JSONObject("{items : [{'label':'Laptop','price': {'min':10000,'max':50000 }},{'label':'Mobile phone','price': {'min':1000,'max':5000 }}]}")
                 val jsonArray: JSONArray = jsonObj.getJSONArray("items")
 
                 var priceRage: String = "";
@@ -161,7 +164,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     var jsonItem: JSONObject = jsonArray.getJSONObject(i)
                     if(jsonItem.get("label").equals("${category.label}"))
                     {
-                        priceRage = jsonItem.getJSONObject("price").get("min") as String + " - " + jsonItem.getJSONObject("price").get("max") as String
+                        minPrice = minPrice + jsonItem.getJSONObject("price").get("min") as Int
+                        maxPrice = maxPrice + jsonItem.getJSONObject("price").get("max") as Int
+
+                        priceRage = String.format(" ₹%d - ₹%d", minPrice, maxPrice)
                     }
                 }
 
@@ -173,10 +179,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             runOnUiThread {
                 inputImageView.setImageBitmap(imgWithResult)
             }
+
+            priceRangeView!!.text = "Price Range : $minPrice - $maxPrice"
         }
-
-
-
     }
 
     private fun debugPrint(results : List<Detection>) {
