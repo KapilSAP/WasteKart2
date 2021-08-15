@@ -67,6 +67,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var imgSampleOne: ImageView
     private lateinit var imgSampleTwo: ImageView
     private lateinit var imgSampleThree: ImageView
+    private lateinit var imgSampleFour: ImageView
+    private lateinit var imgSampleFive: ImageView
     private lateinit var tvPlaceholder: TextView
     private lateinit var currentPhotoPath: String
     private lateinit var priceRangeView: TextView
@@ -80,6 +82,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         imgSampleOne = findViewById(R.id.imgSampleOne)
         imgSampleTwo = findViewById(R.id.imgSampleTwo)
         imgSampleThree = findViewById(R.id.imgSampleThree)
+        imgSampleFour = findViewById(R.id.imgSampleFour)
+        imgSampleFive = findViewById(R.id.imgSampleFive)
         tvPlaceholder = findViewById(R.id.tvPlaceholder)
         priceRangeView = findViewById(R.id.tv_priceRange)
 
@@ -87,6 +91,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         imgSampleOne.setOnClickListener(this)
         imgSampleTwo.setOnClickListener(this)
         imgSampleThree.setOnClickListener(this)
+        imgSampleFour.setOnClickListener(this)
+        imgSampleFive.setOnClickListener(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -112,13 +118,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
             R.id.imgSampleOne -> {
-                setViewAndDetect(getSampleImage(R.drawable.img_meal_one))
+                setViewAndDetect(getSampleImage(R.drawable.img_laptop_one))
             }
             R.id.imgSampleTwo -> {
-                setViewAndDetect(getSampleImage(R.drawable.img_meal_two))
+                setViewAndDetect(getSampleImage(R.drawable.img_laptop_two))
             }
             R.id.imgSampleThree -> {
-                setViewAndDetect(getSampleImage(R.drawable.img_meal_three))
+                setViewAndDetect(getSampleImage(R.drawable.img_phone_one))
+            }
+            R.id.imgSampleFour -> {
+                setViewAndDetect(getSampleImage(R.drawable.img_phone_two))
+            }
+            R.id.imgSampleFive -> {
+                setViewAndDetect(getSampleImage(R.drawable.img_phone_laptop))
             }
         }
     }
@@ -148,8 +160,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
         GlobalScope.launch {
-            var minPrice : Int = 0
-            var maxPrice : Int = 0
+            var totalMinPrice : Int = 0
+            var totalMaxPrice : Int = 0
             val resultToDisplay = results.map {
                 // Get the top-1 category and craft the display text
                 val category = it.categories.first()
@@ -159,14 +171,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val jsonObj: JSONObject = JSONObject("{items : [{'label':'Laptop','price': {'min':10000,'max':50000 }},{'label':'Mobile phone','price': {'min':1000,'max':5000 }}]}")
                 val jsonArray: JSONArray = jsonObj.getJSONArray("items")
 
-                var priceRage: String = "";
+                var priceRage: String = ""
                 for (i in 0 until jsonArray.length()) {
                     var jsonItem: JSONObject = jsonArray.getJSONObject(i)
                     if(jsonItem.get("label").equals("${category.label}"))
                     {
-                        minPrice = minPrice + jsonItem.getJSONObject("price").get("min") as Int
-                        maxPrice = maxPrice + jsonItem.getJSONObject("price").get("max") as Int
-
+                        var minPrice = jsonItem.getJSONObject("price").get("min") as Int
+                        var maxPrice = jsonItem.getJSONObject("price").get("max") as Int
+                        totalMinPrice = totalMinPrice + minPrice
+                        totalMaxPrice = totalMaxPrice + maxPrice
                         priceRage = String.format(" ₹%d - ₹%d", minPrice, maxPrice)
                     }
                 }
@@ -180,7 +193,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 inputImageView.setImageBitmap(imgWithResult)
             }
 
-            priceRangeView!!.text = "Price Range : $minPrice - $maxPrice"
+            priceRangeView!!.text = "Total Price Range : ₹$totalMinPrice - ₹$totalMaxPrice"
         }
     }
 

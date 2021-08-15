@@ -37,7 +37,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:text="Price Range : " />
+        android:text="Total Price Range : " />
 
     <TextView
         android:id="@+id/tvDescription"
@@ -64,7 +64,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
-            android:src="@drawable/img_meal_one" />
+            android:src="@drawable/img_laptop_one" />
 
         <ImageView
             android:id="@+id/imgSampleTwo"
@@ -75,7 +75,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
-            android:src="@drawable/img_meal_two" />
+            android:src="@drawable/img_laptop_two" />
 
         <ImageView
             android:id="@+id/imgSampleThree"
@@ -84,7 +84,26 @@
             android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
-            android:src="@drawable/img_meal_three" />
+            android:src="@drawable/img_phone_one" />
+
+        <ImageView
+            android:id="@+id/imgSampleFour"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_phone_two" />
+
+        <ImageView
+            android:id="@+id/imgSampleFive"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_phone_laptop" />
+
     </LinearLayout>
 
     <Button
