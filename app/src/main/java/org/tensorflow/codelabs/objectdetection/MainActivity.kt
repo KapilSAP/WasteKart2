@@ -93,6 +93,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         imgSampleThree.setOnClickListener(this)
         imgSampleFour.setOnClickListener(this)
         imgSampleFive.setOnClickListener(this)
+
+        var nextButton = findViewById<Button>(R.id.nextButton)
+        nextButton.setOnClickListener(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -131,6 +134,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.imgSampleFive -> {
                 setViewAndDetect(getSampleImage(R.drawable.img_phone_laptop))
+            }
+            R.id.nextButton -> {
+                setContentView(R.layout.activity_sys_info)
             }
         }
     }
