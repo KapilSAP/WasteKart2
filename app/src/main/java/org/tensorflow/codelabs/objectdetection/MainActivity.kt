@@ -137,6 +137,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.nextButton -> {
                 setContentView(R.layout.activity_sys_info)
+                var submitButton = findViewById<Button>(R.id.submitButton)
+                submitButton.setOnClickListener(this)
+            }
+            R.id.submitButton -> {
+                setContentView(R.layout.activity_sys_info_out)
             }
         }
     }
