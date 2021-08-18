@@ -178,17 +178,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val category = it.categories.first()
                 val text = "${category.label}, ${category.score.times(100).toInt()}%"
 
-                //val priceResponse = getPrice("${category.label}")
-                val jsonObj: JSONObject = JSONObject("{items : [{'label':'Laptop','price': {'min':10000,'max':50000 }},{'label':'Mobile phone','price': {'min':1000,'max':5000 }}]}")
-                val jsonArray: JSONArray = jsonObj.getJSONArray("items")
+                val priceResponse = getPrice("${category.label}")
+                val jsonObj: JSONObject = JSONObject(priceResponse)
+                val jsonArray: JSONArray = jsonObj.getJSONArray("value")
 
                 var priceRage: String = ""
                 for (i in 0 until jsonArray.length()) {
                     var jsonItem: JSONObject = jsonArray.getJSONObject(i)
-                    if(jsonItem.get("label").equals("${category.label}"))
+                    var jsonCategory: JSONObject = jsonItem.getJSONObject("category")
+                    var jsonPrice: JSONObject = jsonItem.getJSONObject("price")
+
+                    if((jsonCategory.get("name") as String).equals("${category.label}", ignoreCase = true))
                     {
-                        var minPrice = jsonItem.getJSONObject("price").get("min") as Int
-                        var maxPrice = jsonItem.getJSONObject("price").get("max") as Int
+                        var minPrice = jsonPrice.get("priceLow") as Int
+                        var maxPrice = jsonPrice.get("priceHigh") as Int
                         totalMinPrice = totalMinPrice + minPrice
                         totalMaxPrice = totalMaxPrice + maxPrice
                         priceRage = String.format(" ₹%d - ₹%d", minPrice, maxPrice)
