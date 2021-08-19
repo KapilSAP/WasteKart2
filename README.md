@@ -29,4 +29,4 @@ Application can run either on device or emulator.
 
 ## Demo
 
-![dssdds](https://github.com/KapilSAP/WasteKart2/blob/main/gallery/Demo_Video.gif)
+<img src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/Demo_Video.gif" width="250" height="400"/>
