@@ -11,3 +11,10 @@ To understand better, here is the good [tutorial](https://codelabs.developers.go
 The dataset used for Laptop and Mobile phone is [Open Images](https://storage.googleapis.com/openimages/web/index.html)
 
 ## Installation Setup
+
+Application can run either on device or emulator.
+
+### Prerequisites
+* If you don't have already, install [Android Studio](https://developer.android.com/studio/index.html), following the instructions on the website.
+* You need an Android device and Android development environment with minimum API 21.
+* Android Studio 3.2 or later.
