@@ -30,3 +30,17 @@ Application can run either on device or emulator.
 ## Demo
 
 <img src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/Demo_Video.gif" width="250" height="400"/>
+
+
+## Gallery
+
+<p align="left" width="100%">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic1.jpeg">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic2.jpeg">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic3.jpeg">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic4.jpeg">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic5.jpeg">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic6.jpeg">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic7.jpeg">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic8.jpeg">
+</p>
