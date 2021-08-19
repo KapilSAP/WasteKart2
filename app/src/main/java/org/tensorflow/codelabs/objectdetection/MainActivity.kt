@@ -68,7 +68,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var imgSampleTwo: ImageView
     private lateinit var imgSampleThree: ImageView
     private lateinit var imgSampleFour: ImageView
-    private lateinit var imgSampleFive: ImageView
     private lateinit var tvPlaceholder: TextView
     private lateinit var currentPhotoPath: String
     private lateinit var priceRangeView: TextView
@@ -83,7 +82,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         imgSampleTwo = findViewById(R.id.imgSampleTwo)
         imgSampleThree = findViewById(R.id.imgSampleThree)
         imgSampleFour = findViewById(R.id.imgSampleFour)
-        imgSampleFive = findViewById(R.id.imgSampleFive)
         tvPlaceholder = findViewById(R.id.tvPlaceholder)
         priceRangeView = findViewById(R.id.tv_priceRange)
 
@@ -92,7 +90,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         imgSampleTwo.setOnClickListener(this)
         imgSampleThree.setOnClickListener(this)
         imgSampleFour.setOnClickListener(this)
-        imgSampleFive.setOnClickListener(this)
 
         var nextButton = findViewById<Button>(R.id.nextButton)
         nextButton.setOnClickListener(this)
@@ -131,9 +128,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.imgSampleFour -> {
                 setViewAndDetect(getSampleImage(R.drawable.img_phone_two))
-            }
-            R.id.imgSampleFive -> {
-                setViewAndDetect(getSampleImage(R.drawable.img_phone_laptop))
             }
             R.id.nextButton -> {
                 setContentView(R.layout.activity_sys_info)
@@ -188,7 +182,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     var jsonCategory: JSONObject = jsonItem.getJSONObject("category")
                     var jsonPrice: JSONObject = jsonItem.getJSONObject("price")
 
-                    if((jsonCategory.get("name") as String).equals("${category.label}", ignoreCase = true))
+                    if((jsonCategory.get("name") as String).contains("${category.label}", ignoreCase = true))
                     {
                         var minPrice = jsonPrice.get("priceLow") as Int
                         var maxPrice = jsonPrice.get("priceHigh") as Int
@@ -412,7 +406,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         suspendCoroutine { cont ->
             val callback1 = Response.Listener<String> { response -> cont.resume(response) }
             val callback2 = Response.ErrorListener { error -> cont.resume(error.toString()) }
-            val url = "https://price-recomm-srv-mediating-porcupine-gj.cfapps.us10.hana.ondemand.com/price-recomm/Products?%24top=1"
+            val url = "https://price-recomm-srv-mediating-porcupine-gj.cfapps.us10.hana.ondemand.com/price-recomm/Products?%24expand=category,price"
             val queue = Volley.newRequestQueue(this)
             val stringRequest = StringRequest(Request.Method.GET, url, callback1, callback2)
             queue!!.add(stringRequest)

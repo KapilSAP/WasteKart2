@@ -37,7 +37,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:text="Total Price Range : " />
+        android:text="Total Price Range : "
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/tvDescription"
@@ -81,6 +82,7 @@
             android:id="@+id/imgSampleThree"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_marginEnd="8dp"
             android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
@@ -90,19 +92,12 @@
             android:id="@+id/imgSampleFour"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
             android:src="@drawable/img_phone_two" />
-
-        <ImageView
-            android:id="@+id/imgSampleFive"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@null"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img_phone_laptop" />
 
     </LinearLayout>
 
