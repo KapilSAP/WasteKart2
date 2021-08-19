@@ -26,3 +26,7 @@ Application can run either on device or emulator.
 * You may also need to install various platforms and tools, if you get errors like "Failed to find target with hash string 'android-21'" and similar. Click the Run button (the green arrow) or select Run > Run 'android' from the top menu. You may need to rebuild the project using Build > Rebuild Project.
 * If it asks you to use Instant Run, click Proceed Without Instant Run.
 * Also, you need to have an Android device plugged in with developer options enabled at this point. See [here](https://developer.android.com/studio/run/device) for more details on setting up developer devices.
+
+## Demo
+
+![dssdds](https://github.com/KapilSAP/WasteKart2/blob/main/gallery/Demo_Video.gif)
