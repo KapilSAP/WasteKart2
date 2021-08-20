@@ -27,6 +27,14 @@ Application can run either on device or emulator.
 * If it asks you to use Instant Run, click Proceed Without Instant Run.
 * Also, you need to have an Android device plugged in with developer options enabled at this point. See [here](https://developer.android.com/studio/run/device) for more details on setting up developer devices.
 
+## Price Recommendation API
+
+### Application Route
+https://price-recomm-srv-mediating-porcupine-gj.cfapps.us10.hana.ondemand.com/
+
+### API used by APP
+https://price-recomm-srv-mediating-porcupine-gj.cfapps.us10.hana.ondemand.com/price-recomm/Products?$expand=category,price
+
 ## Demo
 
 <img src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/Demo_Video.gif" width="250" height="400"/>
