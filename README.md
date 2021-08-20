@@ -10,6 +10,8 @@ To understand better, here is the good [tutorial](https://codelabs.developers.go
 
 The dataset used for Laptop and Mobile phone is [Open Images](https://storage.googleapis.com/openimages/web/index.html)
 
+Please follow [Google Colab](https://colab.research.google.com/drive/1LhsI0LyJszN_0WjpHJIAKoV87vegQWkH?usp=sharing) to see how training done on custom dataset and how tensorflow lite model is extracted to be used.
+
 ## Installation Setup
 
 Application can run either on device or emulator.
