@@ -1,3 +1,5 @@
+<img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/Logo.png" align="right">
+
 # WasteKart2
 
 WasteKart is the App which help End Customers to scan their waste and get relevant information instantly along with estimated price range through inbuild object detection manich learning alrogrithm.
