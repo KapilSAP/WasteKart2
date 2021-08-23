@@ -10,6 +10,8 @@ To understand better, here is the good [tutorial](https://codelabs.developers.go
 
 The dataset used for Laptop and Mobile phone is [Open Images](https://storage.googleapis.com/openimages/web/index.html)
 
+Please follow [Google Colab](https://colab.research.google.com/drive/1LhsI0LyJszN_0WjpHJIAKoV87vegQWkH?usp=sharing) to see how training done on custom dataset and how tensorflow lite model is extracted to be used.
+
 ## Installation Setup
 
 Application can run either on device or emulator.
@@ -26,3 +28,33 @@ Application can run either on device or emulator.
 * You may also need to install various platforms and tools, if you get errors like "Failed to find target with hash string 'android-21'" and similar. Click the Run button (the green arrow) or select Run > Run 'android' from the top menu. You may need to rebuild the project using Build > Rebuild Project.
 * If it asks you to use Instant Run, click Proceed Without Instant Run.
 * Also, you need to have an Android device plugged in with developer options enabled at this point. See [here](https://developer.android.com/studio/run/device) for more details on setting up developer devices.
+
+## Price Recommendation API
+
+### Application Route
+https://price-recomm-srv-mediating-porcupine-gj.cfapps.us10.hana.ondemand.com/
+
+### API used by APP
+https://price-recomm-srv-mediating-porcupine-gj.cfapps.us10.hana.ondemand.com/price-recomm/Products?$expand=category,price
+
+## Demo
+
+<img src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/Demo_Video.gif" width="250" height="400"/>
+
+
+## Gallery
+
+<p align="left" width="100%">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic1.jpeg">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic2.jpeg">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic3.jpeg">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic4.jpeg">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic5.jpeg">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic6.jpeg">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic7.jpeg">
+    <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic8.jpeg">
+</p>
+
+## Roadmap
+* Display Recycle Guide based on detected object
+* [Geofire](https://github.com/firebase/geofire-android) Integration to find nearest ragman
