@@ -54,3 +54,7 @@ https://price-recomm-srv-mediating-porcupine-gj.cfapps.us10.hana.ondemand.com/pr
     <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic7.jpeg">
     <img width="15%" src="https://github.com/KapilSAP/WasteKart2/blob/main/gallery/pic8.jpeg">
 </p>
+
+## Roadmap
+* Display Recycle Guide based on detected object
+* [Geofire](https://github.com/firebase/geofire-android) Integration to find nearest ragman
